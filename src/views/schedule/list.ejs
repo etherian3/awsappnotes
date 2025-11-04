@@ -1,0 +1,27 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h4 mb-0"><i class="bi bi-calendar-event me-2"></i>Schedule</h1>
+  <a href="/schedule/new" class="btn btn-primary"><i class="bi bi-plus"></i> New</a>
+  </div>
+
+<div class="list-group">
+  <% if (items.length === 0) { %>
+    <div class="text-muted">No schedule yet.</div>
+  <% } %>
+  <% items.forEach(i => { %>
+    <div class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <div class="fw-semibold"><%= i.title %></div>
+        <div class="small text-muted"><%= i.date %> <%= i.time %> • <%= i.location %></div>
+        <div class="small"><%= i.note %></div>
+      </div>
+      <div class="ms-3">
+        <a class="btn btn-sm btn-outline-secondary" href="/schedule/<%= i.id %>/edit"><i class="bi bi-pencil"></i></a>
+        <form method="post" action="/schedule/<%= i.id %>/delete" class="d-inline" onsubmit="return confirm('Delete this schedule?')">
+          <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+        </form>
+      </div>
+    </div>
+  <% }) %>
+  </div>
+
+

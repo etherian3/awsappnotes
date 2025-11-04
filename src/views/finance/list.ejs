@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h4 mb-0"><i class="bi bi-cash-coin me-2"></i>Finance</h1>
+  <a href="/finance/new" class="btn btn-primary"><i class="bi bi-plus"></i> Add</a>
+  </div>
+
+<div class="table-responsive">
+  <table class="table table-striped align-middle">
+    <thead>
+      <tr>
+        <th>Date</th><th>Type</th><th>Amount</th><th>Category</th><th>Note</th><th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (items.length === 0) { %>
+        <tr><td colspan="6" class="text-muted">No finance entries.</td></tr>
+      <% } %>
+      <% items.forEach(i => { %>
+        <tr>
+          <td><%= i.date %></td>
+          <td><span class="badge <%= i.type === 'income' ? 'bg-success' : 'bg-danger' %>"><%= i.type %></span></td>
+          <td>Rp <%= (i.amount || 0).toLocaleString() %></td>
+          <td><%= i.category %></td>
+          <td><%= i.note %></td>
+          <td class="text-end">
+            <a class="btn btn-sm btn-outline-secondary" href="/finance/<%= i.id %>/edit"><i class="bi bi-pencil"></i></a>
+            <form method="post" action="/finance/<%= i.id %>/delete" class="d-inline" onsubmit="return confirm('Delete this entry?')">
+              <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  </div>
+
+

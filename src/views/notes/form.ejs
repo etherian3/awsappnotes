@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h4 mb-0"><%= title %></h1>
+  <a href="/notes" class="btn btn-outline-secondary">Back</a>
+  </div>
+
+<form method="post" action="<%= note.id ? '/notes/' + note.id : '/notes' %>">
+  <div class="mb-3">
+    <label class="form-label">Title</label>
+    <input class="form-control" name="title" value="<%= note.title || '' %>" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Tags</label>
+    <input class="form-control" name="tags" value="<%= note.tags || '' %>" placeholder="e.g. work, idea">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Content</label>
+    <textarea class="form-control" name="content" rows="6" required><%= note.content || '' %></textarea>
+  </div>
+  <button class="btn btn-primary">Save</button>
+</form>
+
+

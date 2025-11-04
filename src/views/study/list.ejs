@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h4 mb-0"><i class="bi bi-mortarboard me-2"></i>Study Notes</h1>
+  <a href="/study/new" class="btn btn-primary"><i class="bi bi-plus"></i> New</a>
+  </div>
+
+<div class="row g-3">
+  <% if (items.length === 0) { %>
+    <div class="col-12 text-muted">No study notes yet.</div>
+  <% } %>
+  <% items.forEach(i => { %>
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-start">
+            <h5 class="card-title mb-1"><%= i.topic %></h5>
+            <span class="badge bg-info text-dark"><%= i.subject %></span>
+          </div>
+          <p class="card-text"><%= i.content %></p>
+          <div class="small text-muted">Resources: <%= i.resources %></div>
+        </div>
+        <div class="card-footer d-flex gap-2">
+          <a class="btn btn-sm btn-outline-secondary" href="/study/<%= i.id %>/edit"><i class="bi bi-pencil"></i> Edit</a>
+          <form method="post" action="/study/<%= i.id %>/delete" onsubmit="return confirm('Delete this note?')">
+            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i> Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+  </div>
+
+

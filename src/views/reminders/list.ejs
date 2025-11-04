@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h4 mb-0"><i class="bi bi-alarm me-2"></i>Reminders</h1>
+  <a href="/reminders/new" class="btn btn-primary"><i class="bi bi-plus"></i> New</a>
+  </div>
+
+<div class="list-group">
+  <% if (items.length === 0) { %>
+    <div class="text-muted">No reminders yet.</div>
+  <% } %>
+  <% items.forEach(i => { %>
+    <div class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <div class="fw-semibold <%= i.done ? 'text-decoration-line-through text-muted' : '' %>"><%= i.title %></div>
+        <div class="small text-muted"><%= i.dueDate %> <%= i.dueTime %> • <span class="badge bg-<%= i.priority === 'high' ? 'danger' : (i.priority === 'low' ? 'secondary' : 'warning text-dark') %>"><%= i.priority %></span></div>
+        <div class="small"><%= i.note %></div>
+      </div>
+      <div class="ms-3">
+        <form method="post" action="/reminders/<%= i.id %>/toggle" class="d-inline">
+          <button class="btn btn-sm btn-outline-success"><i class="bi bi-check2-circle"></i></button>
+        </form>
+        <a class="btn btn-sm btn-outline-secondary" href="/reminders/<%= i.id %>/edit"><i class="bi bi-pencil"></i></a>
+        <form method="post" action="/reminders/<%= i.id %>/delete" class="d-inline" onsubmit="return confirm('Delete this reminder?')">
+          <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+        </form>
+      </div>
+    </div>
+  <% }) %>
+  </div>
+
+
